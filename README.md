@@ -33,7 +33,7 @@ We provide you with 10 maps, including 9 handcrafted maps (maze0.png to maze0.pn
 
 You should implement the planners, test them, generate controls for each testcase, and submit all of them. For discrete and continuous actions (task 1 and task 2), please save them in `.txt` files. For MDP policy, please save it into a json file. We have provided functions in base_planner.py.
 
-Some example control files can be found [here]('./files/).
+Some example control files can be found [here](./files/).
 
 ## How to run the code
 
