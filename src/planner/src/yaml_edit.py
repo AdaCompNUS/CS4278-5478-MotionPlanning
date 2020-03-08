@@ -12,6 +12,11 @@ with open(argv[1], 'r') as fin:
 if '/' in argv[2]:
     argv[2] = argv[2].split('/')[-1]
 
+if 'com' in argv[2]:
+    file['resolution'] = 0.02
+else:
+    file['resolution'] = 0.05
+
 file['image'] = argv[2]
 
 with open(argv[1], 'w') as fout:
