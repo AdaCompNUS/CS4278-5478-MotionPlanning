@@ -27,15 +27,7 @@ You should be able to see the RViz and ROS stage.
 ## What you need to do
 We split the robot navigation task into three parts: simulator, controller and planner. We use a very simple controller defined in the planner file. In this assignment, we provide you with the simulator and all the necessary functions for 1) ROS nodes 2) data communication 3) controlling the robot. You only need to implement the planning algorithms and collision checking mechanism, and fill in the template marked with `# TODO: FILL ME!` in `base_planner.py`. 
 
-We would recomment you to use `base_planner.py` as a base class impelement your planners as derived classes.
-
-We provide you with 10 maps, including 9 handcrafted maps (maze0.png to maze0.png) and an illustrative COM1 level 1 floorplan (com1.jpg). You can find them [here](./src/planner/maps/). Each map has a list of corresponding testcases, with the goals specified [here](./files/goals.json). For all cases, we assume the robot starts with pose (1, 1, 0).
-
-You should implement the planners, test them, generate controls for each testcase, and submit all of them. For discrete and continuous actions (task 1 and task 2), please save them in `.txt` files. For MDP policy, please save it into a json file. We have provided functions in base_planner.py.
-
-The naming should follow `{task}_{map}_{goal}.txt` for task 1 and task 2; `{task}_{map}_{goal_x}_{goal_y}.json` for task 3. For example, `1_maze2_5_5.txt` for the discrete planner on maze2.png with [5, 5] as the goal.
-
-Some example control files can be found [here](./files/).
+We would recomment you to use `base_planner.py` as a base class, then impelement your planners as derived classes.
 
 ## How to run the code
 
@@ -46,7 +38,7 @@ sh run.sh [your map name] start_x start_y start_theta
 python your_planner.py --goal 'goal_x,goal_y' --com use_com_1_map_or_not
 ```
 
-Specifically, suppose we want to load *maze8.png*, set the start pose of the robot as $(x=2, y=2, \theta=0)$, and set the goal to be $(x'=8, y'=8)$. You should:
+Specifically, suppose we want to load *maze8.png*, set the start pose of the robot as (x=2, y=2, \theta=0), and set the goal to be (x'=8, y'=8). You should:
 1. Go into the source directory `roscd planner/src`
 2. Launch the simulator and set the start of the robot `sh run.sh maze8.png 2 2 0`
 3. Open a new shell and launch the controller `python simple_controller.py`
@@ -54,3 +46,19 @@ Specifically, suppose we want to load *maze8.png*, set the start pose of the rob
 
 ## Notes
 For visualization, please use ROS stage. RViz provides the 2.5D visualization but has certain noise due to ROS asynchronous communication.
+
+## Submission
+
+We provide you with 10 maps, including 9 handcrafted maps (maze0.png to maze0.png) and an illustrative COM1 level 1 floorplan (com1.jpg). You can find them [here](./src/planner/maps/). Each map has a list of corresponding testcases, with the goals specified [here](./files/goals.json). For all cases, we assume the robot starts with pose (1, 1, 0).
+
+You should implement the planners, test them, generate controls for each testcase, and submit all of them. For discrete and continuous actions (task 1 and task 2), please save them in `.txt` files. For MDP policy, please save it into a json file. We have provided functions in base_planner.py.
+
+The naming should follow `{task}_{map}_{goal}.txt` for task 1 and task 2; `{task}_{map}_{goal_x}_{goal_y}.json` for task 3. For example, 
+
+- `1_maze2_5_5.txt` for the discrete planner on maze2.png with [5, 5] as the goal.
+- `2_maze3_9_9.txt` for the continuous planner on maze3.png with [9, 9] as the goal.
+- `3_com1_43_10.json` for the mdp policy on com1.jpg with [43, 10] as the goal.
+
+Some example control files can be found [here](./files/).
+
+Please follow the [submission folder](./submissions/) to order your files. Any violation to the naminig and file organization will be penalized by 10%.
