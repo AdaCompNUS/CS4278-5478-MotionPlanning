@@ -60,5 +60,3 @@ The naming should follow `{task}_{map}_{goal}.txt` for task 1 and task 2; `{task
 - `3_com1_43_10.json` for the mdp policy on com1.jpg with [43, 10] as the goal.
 
 Some example control files can be found [here](./files/).
-
-Please follow the [submission folder](./submissions/) to order your files. Any violation to the naminig and file organization will be penalized by 10%.
