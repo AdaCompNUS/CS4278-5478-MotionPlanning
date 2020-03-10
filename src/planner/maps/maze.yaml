@@ -1,5 +1,5 @@
 free_thresh: 0.196
-image: maze8.png
+image: com1.jpg
 negate: 0
 occupied_thresh: 0.95
 origin: [0.0, 0.0, 0.0]

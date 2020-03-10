@@ -14,8 +14,10 @@ if '/' in argv[2]:
 
 if 'com' in argv[2]:
     file['resolution'] = 0.02
+    file['occupied_thresh'] = 0.95
 else:
     file['resolution'] = 0.05
+    file['occupied_thresh'] = 0.65
 
 file['image'] = argv[2]
 

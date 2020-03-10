@@ -33,9 +33,9 @@ window
 floorplan
 (
 name "maze"
-bitmap "../maze8.png"
-size [ 10.0 10.0 2.0 ]
-pose [ 5.0 5.0 0.0 0.0 ]
+bitmap "../com1.jpg"
+size [ 50.0 19.66 2.0 ]
+pose [  25.0  9.83 0.0 0.0 ]
 )
 # end of floor plan
 
@@ -45,5 +45,5 @@ turtlebot
   velocity_bounds [-2 2 -2 2 -2 2 -180 180 ]
   name "turtlebot"
   color "black"
-  pose [ 2 2 0.0 0 ]
+  pose [ 1 1 0.0 0 ]
 )

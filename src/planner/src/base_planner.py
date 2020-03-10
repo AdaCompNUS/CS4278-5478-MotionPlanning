@@ -226,12 +226,6 @@ class Planner:
             bool -- True for collision, False for non-collision
         """
 
-        if x >= ceil(self.world_width*self.resolution) or x <= 0 or y >= ceil(self.world_height*self.resolution) or y <= 0:
-            return True
-        if (int(y/self.resolution)*self.world_width + int(x/self.resolution) >= self.world_width*self.world_height) or (self.aug_map[int(y/self.resolution)*self.world_width + int(x/self.resolution)]) == 100:
-            print('Collided at', x, y)
-            return True
-
         return False
 
     def motion_predict(self, x, y, theta, v, w, dt=0.5, frequency=10):
@@ -269,11 +263,6 @@ class Planner:
 
             if self.collision_checker(x, y):
                 return None
-            # if x >= ceil(self.world_width*self.resolution) or x <= 0 or y >= ceil(self.world_height*self.resolution) or y <= 0:
-            #     return None
-            # if (int(y/self.resolution)*self.world_width + int(x/self.resolution) >= self.world_width*self.world_height) or (self.aug_map[int(y/self.resolution)*self.world_width + int(x/self.resolution)]) == 100:
-            #     print('Collided at', x, y)
-            #     return None
             theta += w / frequency
         return x, y, theta
 
@@ -360,7 +349,7 @@ class Planner:
 if __name__ == "__main__":
     # TODO: You can run the code using the code below
     parser = argparse.ArgumentParser()
-    parser.add_argument('--goal', type=str, default='1,1',
+    parser.add_argument('--goal', type=str, default='1,8',
                         help='goal position')
     parser.add_argument('--com', type=int, default=0,
                         help="if the map is com1 map")
@@ -386,6 +375,9 @@ if __name__ == "__main__":
     planner.set_goal(goal[0], goal[1])
     if planner.goal is not None:
         planner.generate_plan()
+
+    # You could replace this with other control publishers
+    planner.publish_discrete_control()
 
     # save your action sequence
     result = np.array(planner.action_seq)
