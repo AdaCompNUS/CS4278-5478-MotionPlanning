@@ -41,8 +41,7 @@ python your_planner.py --goal 'goal_x,goal_y' --com use_com_1_map_or_not
 Specifically, suppose we want to load *maze8.png*, set the start pose of the robot as (x=2, y=2, \theta=0), and set the goal to be (x'=8, y'=8). You should:
 1. Go into the source directory `roscd planner/src`
 2. Launch the simulator and set the start of the robot `sh run.sh maze1.png 1 1 0`
-3. Open a new shell and launch the controller `python simple_controller.py`
-4. Open a new shell and launch the planner script with goal specified `python your_planner.py --goal '5,5' --com 0`. Here, `--com 0` flag indicates that we are not using the `com1.jpg` map. This is because the environment parameter changes from other mazes to the com1 map. 
+3. Open a new shell and launch the planner script with goal specified `python your_planner.py --goal '5,5' --com 0`. Here, `--com 0` flag indicates that we are not using the `com1.jpg` map. This is because the environment parameter changes from other mazes to the com1 map. 
 
 ## Notes
 For visualization, please use ROS stage. RViz provides the 2.5D visualization but has certain noise due to ROS asynchronous communication.
