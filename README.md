@@ -38,7 +38,7 @@ sh run.sh [your map name] start_x start_y start_theta
 python your_planner.py --goal 'goal_x,goal_y' --com use_com_1_map_or_not
 ```
 
-Specifically, suppose we want to load *maze8.png*, set the start pose of the robot as (x=2, y=2, \theta=0), and set the goal to be (x'=8, y'=8). You should:
+Specifically, suppose we want to load *maze1.png*, set the start pose of the robot as (x=2, y=2, \theta=0), and set the goal to be (x'=8, y'=8). You should:
 1. Go into the source directory `roscd planner/src`
 2. Launch the simulator and set the start of the robot `sh run.sh maze1.png 1 1 0`
 3. Open a new shell and launch the planner script with goal specified `python your_planner.py --goal '5,5' --com 0`. Here, `--com 0` flag indicates that we are not using the `com1.jpg` map. This is because the environment parameter changes from other mazes to the com1 map. 
@@ -59,3 +59,8 @@ The naming should follow `{task}_{map}_{goal}.txt` for task 1 and task 2; `{task
 - `3_com1_43_10.json` for the mdp policy on com1.jpg with [43, 10] as the goal.
 
 Some example control files can be found [here](./files/).
+
+In summary, you should submit:
+- Your code
+- The control files for each map and each goal
+- Your report
