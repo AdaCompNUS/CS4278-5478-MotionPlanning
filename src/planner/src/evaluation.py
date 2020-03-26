@@ -108,7 +108,7 @@ class MDPEvaluator(Evaluator):
         position = copy.deepcopy(pose)
         position[0] = round(position[0])
         position[1] = round(position[1])
-        position[2] = (position[2] / (np.pi / 2)) % 4
+        position[2] = round(position[2] / (np.pi / 2)) % 4
 
         position = [str(int(s)) for s in position]
         position = ','.join(position)
