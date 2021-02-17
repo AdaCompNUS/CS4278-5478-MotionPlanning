@@ -1,6 +1,6 @@
 # CS4278/CS5478 Homework Assignment: Mobile Robot Motion Planning
 
-In this assignment, you will be working on planning algorithms for controlling the robot to navigate on a 2D map. The decription to the assignment can be found [here](./files/writeup.pdf).
+In this assignment, you will be working on planning algorithms for controlling the robot to navigate on a 2D map. 
 
 In this README, we provide information about how to run your code and generate output for submission.
 
