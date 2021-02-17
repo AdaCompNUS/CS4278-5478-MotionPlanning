@@ -2,7 +2,6 @@
 
 In this assignment, you will be working on planning algorithms for controlling the robot to navigate on a 2D map. 
 
-In this README, we provide information about how to run your code and generate output for submission.
 
 ## Setup the environment
 
