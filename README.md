@@ -1,6 +1,6 @@
-# CS4278/CS5478 Assignment 3: Planning
+# CS4278/CS5478 Homework Assignment: Mobile Robot Motion Planning
 
-This is the assignment 3 of *CS4278/CS5478, Intelligent Robots: Algorithms and Systems, Spring 2020*. In this assignment, you will be working on planning algorithms for controlling the robot to navigate on a 2D map. The decription to the assignment can be found [here](./files/writeup.pdf).
+In this assignment, you will be working on planning algorithms for controlling the robot to navigate on a 2D map. The decription to the assignment can be found [here](./files/writeup.pdf).
 
 In this README, we provide information about how to run your code and generate output for submission.
 
