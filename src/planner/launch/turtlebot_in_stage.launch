@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Turtlebot navigation simulation:
   - stage
   - map_server
@@ -13,7 +13,7 @@
   <arg name="3d_sensor"  default="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, asus_xtion_pro -->
 
   <!-- Name of the map to use (without path nor extension) and initial position -->
-  <arg name="map_file"       default=" $(find planner)/maps/maze.yaml"/> 
+  <arg name="map_file"       default=" $(find planner)/maps/maze.yaml"/>
   <arg name="world_file"     default=" $(find planner)/maps/stage/maze.world"/>
   <arg name="initial_pose_x" default="1.0"/>
   <arg name="initial_pose_y" default="1.0"/>
@@ -21,7 +21,7 @@
 
   <param name="/use_sim_time" value="true"/>
   <!--  ******************** Stage ********************  -->
-  <!-- 
+  <!--
         Publishes transforms:
           /base_link -> /base_laser
           /base_footprint -> /base_link (identity)
@@ -34,7 +34,7 @@
           base_watchdog_timeout : time (s) after receiving the last command on cmd_vel before stopping the robot
         Args:
           -g : run in headless mode.
-  --> 
+  -->
   <node pkg="stage_ros" type="stageros" name="stageros" args="$(arg world_file)">
     <param name="base_watchdog_timeout" value="0.5"/>
     <remap from="odom" to="odom"/>
@@ -67,7 +67,7 @@
   </include>
 
   <!--  **************** Visualisation ****************  -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find planner)/rviz/robot_navigation.rviz"/>
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find planner)/rviz/robot_navigation.rviz"/> -->
   <!-- <node name="simple_controller" pkg="planner" type="simple_controller" filename="simple_controller.py"/>
   <node name="hybrid_planner" pkg="planner" type="hybrid_planner" filename="hybrid_planner.py"/> -->
 </launch>
