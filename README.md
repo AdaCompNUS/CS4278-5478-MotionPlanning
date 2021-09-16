@@ -59,7 +59,7 @@ The naming should follow `{task}_{map}_{goal}.txt` for task 1 and task 2; `{task
 
 Some example control files can be found [here](./files/).
 
-In summary, you should submit:
-- Your code
-- The control files for each map and each goal
-- Your report
+In summary, you should submit a zip file named MatricNo-Lab1.zip with following folders:
+- Code: your code
+- Plans: the control files for each map and each goal
+- Report: your report
