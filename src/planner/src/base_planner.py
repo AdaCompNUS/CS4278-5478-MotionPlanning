@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
 import numpy as np
-
+import time
 from geometry_msgs.msg import *
 from nav_msgs.msg import *
 from sensor_msgs.msg import *
@@ -316,34 +316,32 @@ class Planner:
             rospy.sleep(0.6)
 
     def publish_stochastic_control(self):
-        """publish stochastic controls in MDP. 
+        """publish stochastic controls in MDP.
         In MDP, we simulate the stochastic dynamics of the robot as described in the assignment description.
         Please use this function to publish your controls in task 3, MDP. DO NOT CHANGE THE PARAMETERS :)
         We will test your policy using the same function.
         """
-        current_state = self.get_current_state()
-        actions = []
-        new_state = current_state
+        current_state = self.get_current_discrete_state()
         while not self._check_goal(current_state):
-            current_state = self.get_current_state()
-            action = self.action_table[current_state[0],
-                                       current_state[1], current_state[2] % 4]
-            if action == (1, 0):
+            current_state = self.get_current_discrete_state()
+            action = self.action_table["{},{},{}".format(current_state[0],
+                                                         current_state[1], current_state[2] % 4)]
+            if action == (1, 0) or action == [1, 0]:
                 r = np.random.rand()
                 if r < 0.9:
                     action = (1, 0)
                 elif r < 0.95:
-                    action = (np.pi/2, 1)
+                    action = (np.pi / 2, 1)
                 else:
-                    action = (np.pi/2, -1)
-            print("Sending actions:", action[0], action[1]*np.pi/2)
-            msg = create_control_msg(action[0], 0, 0, 0, 0, action[1]*np.pi/2)
+                    action = (np.pi / 2, -1)
+            print("Sending actions:", action[0], action[1] * np.pi / 2)
+            msg = self.create_control_msg(action[0], 0, 0, 0, 0, action[1] * np.pi / 2)
             self.controller.publish(msg)
             rospy.sleep(0.6)
             self.controller.publish(msg)
             rospy.sleep(0.6)
             time.sleep(1)
-            current_state = self.get_current_state()
+
 
 
 if __name__ == "__main__":
