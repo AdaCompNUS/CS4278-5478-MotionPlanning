@@ -9,7 +9,7 @@ sudo apt install ros-kinetic-turtlebot-stage
 sudo apt install ros-kinetic-joint-state-publisher-gui
 ```
 
-Clone this repo and setup your environment:
+Clone this repo and setup the environment:
 ```
 catkin_make
 source devel/setup.bash
@@ -21,12 +21,12 @@ roslaunch planner turtlebot_in_stage.launch
 ```
 Now you should see RViz and ROS Stage. 
 
-## What you need to do
+## Code Overview
 We split the robot navigation task into three parts: simulator, controller and planner. We use a very simple controller defined in the planner file. In this assignment, we provide you with the simulator and all the necessary functions for 1) ROS nodes 2) data communication 3) controlling the robot. You only need to implement the planning algorithms and collision checking mechanism, and fill in the template marked with `# TODO: FILL ME!` in `base_planner.py`. 
 
 We would recomment you to use `base_planner.py` as a base class, then impelement your planners as derived classes.
 
-## How to run the code
+## Code Execution
 
 You can simply use the following instructions to launch the simulator and set the configurations. 
 ```
