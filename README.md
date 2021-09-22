@@ -47,7 +47,7 @@ For visualization,  use ROS stage. RViz provides the 2.5D visualization but has 
 
 We provide you with 5 maps, including 4 handcrafted maps (map1.png to map4.png) and an illustrative COM1 level 1 floorplan (com1.jpg). You can find them [here](./src/planner/maps/). Each map has a list of corresponding testcases, with the goals specified [here](./files/goals.json). For all cases, we assume the robot starts with pose (1, 1, 0).
 
-You should implement the planners, test them, generate controls for each testcase, and submit all of them. For discrete and continuous actions (task 1 and task 2),  save them in `.txt` files. For MDP policy,  save it into a json file. We have provided functions in base_planner.py.
+You should implement the planners, test them, generate controls for each testcase, and submit all of them. For DSDA and CSDA (task 1 and task 2),  save them in `.txt` files. For DSPA MDP policy (task 3),  save it into a json file. We have provided functions in base_planner.py.
 
 The naming should follow `{task}_{map}_{goal}.txt` for task 1 and task 2; `{task}_{map}_{goal_x}_{goal_y}.json` for task 3. For example, 
 
