@@ -1,25 +1,25 @@
-# CS4278/CS5478 Lab 1: Motion Planning for Mobile Robots
+# CS4278/CS5478 Lab 1 Motion Planning for Mobile Robots
 
 
-## Setup the environment
-
-We developed the simulator using ROS Kinetic. The simulator is adjusted from [ROS TurtleBot Stage package](http://wiki.ros.org/turtlebot_stage). As your first step, you should install the ROS kinetic according to assignment 1. After installation, install TurtleBot Stage with
+## Simulator Setup
+In Lab 1pre, you have installed ROS Kinetic. The *FoodTutrle* simulator for this lab is adapted from  the  [ROS TurtleBot Stage](http://wiki.ros.org/turtlebot_stage) package.
+Install TurtleBot Stage:
 ```
 sudo apt install ros-kinetic-turtlebot-stage
 sudo apt install ros-kinetic-joint-state-publisher-gui
 ```
 
-Next, clone our repo and setup your environment with
+Clone this repo and setup your environment:
 ```
 catkin_make
 source devel/setup.bash
 ```
 
-Check your setup by 
+Check your setup:
 ```
 roslaunch planner turtlebot_in_stage.launch
 ```
-You should be able to see the RViz and ROS stage. 
+Now you should see RViz and ROS Stage. 
 
 ## What you need to do
 We split the robot navigation task into three parts: simulator, controller and planner. We use a very simple controller defined in the planner file. In this assignment, we provide you with the simulator and all the necessary functions for 1) ROS nodes 2) data communication 3) controlling the robot. You only need to implement the planning algorithms and collision checking mechanism, and fill in the template marked with `# TODO: FILL ME!` in `base_planner.py`. 
