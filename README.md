@@ -25,7 +25,7 @@ roslaunch planner turtlebot_in_stage.launch
 You should see RViz and ROS Stage. 
 
 ## Code Overview
-The FoodTurtle system consists of three components: the simulator, the planner, and the controller. The code in this repository provides most of these components, including the necessary functions for setting up ROS nodes in the simulator, data communication, and robot control. You will implement the planning algorithm and collision avoidance capabilities by filling in the template labeled `# TODO: FILL ME!` in base_planner.py. We recommend that you use base_planner.py as a base class and then implement your planners as derived classes.
+The FoodTurtle system consists of three components: the simulator, the planner, and the controller. The code in this repository provides most of these components, including the necessary functions for setting up ROS nodes in the simulator, data communication, and robot control. You will implement the planning algorithm and collision avoidance capabilities by filling in the template labeled `# TODO: FILL ME!` in base_planner.py. We recommend that you use *base_planner.py* as a base class and then implement your planners as derived classes.
 
 ## Code Execution
 Launch the simulator and execute the planner: 
@@ -51,11 +51,11 @@ The flag `--com`  indicates whether the COM1 map is used, as it requires a speci
 For visualization, we recommend the ROS Stage. RViz provides 2.5-D visualization, but may be noisy due to the asynchronous communication delay of ROS.
 
 ## Performance Evaluation
-A [dataset](./src/planner/maps/) provides 5 maps for evaluation, including 4 hand-crafted maps (map1.png to map4.png) and a simplified COM1 level-1 floor plan (com1.jpg). Each map has a corresponding list of test cases with goals specified [here](./files/goals.json). The robot always starts with the pose (1, 1, 0).
+A [dataset](./src/planner/maps/) provides 5 maps for evaluation, including 4 hand-crafted maps (*map1.png* to *map4.png*) and a simplified COM1 level-1 floor plan (*com1.jpg*). Each map has a corresponding list of test cases with goals specified [here](./files/goals.json). The robot always starts with the pose (1, 1, 0).
 
 To reduce your work, only map4.png may have a misalignment of less than 10 pixels. You can assume that all other maps are sufficiently accurate.
 
-Evaluate your planners in all test cases under the three models, DSDA, CSDA and DSPA. For DSDA and CSDA, save the control actions in a `txt` file and name it `{task}_{map}_{goal_x}_{goal_y}.txt`. For DSPA, save the MDP control policy in a `json` file and name it `{task}_{map}_{goal_x}_{goal_y}.json`.
+Evaluate your planners in all test cases under the three models, DSDA, CSDA and DSPA. For DSDA and CSDA, save the control actions in a `txt` file and name it *{task}_{map}_{goal_x}_{goal_y}.txt*. For DSPA, save the MDP control policy in a `json` file and name it *{task}_{map}_{goal_x}_{goal_y}.json*.
 
 
 For example, 
@@ -66,7 +66,7 @@ For example,
 You can find the functions to save the results in base_planner.py. Some examples of control files can be found [here](./files/).
 
 ## Submission
-Submit a single zip archive named `{MatricNo}-Lab1.zip`, which contains 3 directories:
+Submit a single zip archive named *{MatricNo}-Lab1.zip*, which contains 3 directories:
 - `Code`: your code
 - `Controls`: the control files for all testcases
 - `Report`: your report
