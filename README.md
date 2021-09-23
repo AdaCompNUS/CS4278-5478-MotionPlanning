@@ -47,9 +47,11 @@ The flag `--com`  indicates whether the COM1 map is used, as it requires a speci
 ## Debugging and Visualization
 For visualization,  we recommend  ROS stage. RViz provides 2.5-D visualization, but may be noisy  due to ROS asynchronous communication delays.
 
-## Submission
+## Evaluation
 
 A [dataset](./src/planner/maps/) of 5 maps are provided for evaluation, including 4 handcrafted maps (map1.png to map4.png) and a simplified COM1 level-1 floorplan (com1.jpg).  Each map has a corresponding list of testcases, with the goals specified [here](./files/goals.json). The robot always starts with pose (1, 1, 0).
+
+To reduce your work, only map4.png is possily misaligned. You may assume that all other maps are sufficiently accurate.
 
 Evaluate your planners on all testcases under the three models, DSDA, CSDA, and DSPA. For DSDA and CSDA,  save the control actions in a `txt` files and name it {task}_{map}_{goal}.txt. For DSPA,  save the MDP control policy in a  `json` files and name it {task}_{map}_{goal_x}_{goal_y}.json. 
 For example, 
@@ -59,7 +61,8 @@ For example,
 
 You may find the functions to save the results in base_planner.py. Some example control files can be found [here](./files/).
 
-Finally, submit a single zip archive and name it MatricNo-Lab1.zip. It contains 3 directories:
+## Submission
+Submit a single zip archive and name it MatricNo-Lab1.zip. It contains 3 directories:
 - `Code`: your code
 - `Controls`: the control files for all testcases
 - `Report`: your report
