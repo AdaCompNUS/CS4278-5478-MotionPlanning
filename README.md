@@ -1,8 +1,8 @@
 # CS4278/CS5478 Lab 1 Motion Planning for Mobile Robots
 
 
-## Simulator Setup
-In Lab 1pre, you have installed ROS Kinetic. The *FoodTutrle* simulator for this lab is adapted from  the  [ROS TurtleBot Stage](http://wiki.ros.org/turtlebot_stage) package.
+## Simulator Installation and Setup
+In Lab 1pre, you have already installed ROS Kinetic. The *FoodTutrle* simulator for this lab is adapted from  the  [ROS TurtleBot Stage](http://wiki.ros.org/turtlebot_stage) package.
 Install TurtleBot Stage:
 ```
 sudo apt install ros-kinetic-turtlebot-stage
@@ -19,29 +19,33 @@ Check your setup:
 ```
 roslaunch planner turtlebot_in_stage.launch
 ```
-Now you should see RViz and ROS Stage. 
+You should see RViz and ROS Stage. 
 
 ## Code Overview
-We split the robot navigation task into three parts: simulator, controller and planner. We use a very simple controller defined in the planner file. In this assignment, we provide you with the simulator and all the necessary functions for 1) ROS nodes 2) data communication 3) controlling the robot. You only need to implement the planning algorithms and collision checking mechanism, and fill in the template marked with `# TODO: FILL ME!` in `base_planner.py`. 
-
-We would recomment you to use `base_planner.py` as a base class, then impelement your planners as derived classes.
+The FoodTurtle system consists of three components: simulator, planner, and controller. The code in this repo provides most of these components, including the required functions to set up ROS nodes, data communication, and robot control in the simulator. You will implement the planning algorithms and collision avoidance capability by filling in the template marked with `# TODO: FILL ME!` in `base_planner.py`. We  recommend that you  use `base_planner.py` as a base class and then impelement your planners as derived classes.
 
 ## Code Execution
-
-You can simply use the following instructions to launch the simulator and set the configurations. 
+Launch the simulator and execute the planner: 
 ```
 roscd planner/src
 sh run.sh [your map name] start_x start_y start_theta
 python your_planner.py --goal 'goal_x,goal_y' --com use_com_1_map_or_not
 ```
 
-Specifically, suppose we want to load *map1.png*, set the start pose of the robot as (x=2, y=2, \theta=0), and set the goal to be (x'=8, y'=8). You should:
-1. Go into the source directory `roscd planner/src`
-2. Launch the simulator and set the start of the robot `sh run.sh map1.png 1 1 0`
-3. Open a new shell and launch the planner script with goal specified `python your_planner.py --goal '5,5' --com 0`. Here, `--com 0` flag indicates that we are not using the `com1.jpg` map. This is because the environment parameter changes from other maps to the com1 map. 
+For example, load *map1.png* and set the robot start pose as (x=1, y=1, θ=0): 
+```
+roscd planner/src
+sh run.sh map1.png 1 1 0
+```
 
-## Notes
-For visualization,  use ROS stage. RViz provides the 2.5D visualization but has certain noise due to ROS asynchronous communication.
+Set the robot goal as (x'=5, y'=5) and run the planner:
+```
+python your_planner.py --goal '5,5' --com 0
+```
+The flag `--com`  indicates whether the COM1 map is used, as it requires a special set of environment parameters. 
+
+## Debugging and Visualization
+For visualization,  we recommend  ROS stage. RViz provides 2.5-D visualization, but may be noisy  due to ROS asynchronous communication delays.
 
 ## Submission
 
