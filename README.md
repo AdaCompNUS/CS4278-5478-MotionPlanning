@@ -9,11 +9,14 @@ sudo apt install ros-kinetic-turtlebot-stage
 sudo apt install ros-kinetic-joint-state-publisher-gui
 ```
 
-Clone this repo and setup the environment:
+Clone this repo and set up the environment:
 ```
+git clone https://github.com/AdaCompNUS/CS4278-5478-MotionPlanning
+cd CS4278-5478-MotionPlanning
 catkin_make
 source devel/setup.bash
 ```
+If you use the ROS docker, you may need to make a docker commit. 
 
 Check your setup:
 ```
@@ -47,7 +50,7 @@ The flag `--com`  indicates whether the COM1 map is used, as it requires a speci
 ## Debugging and Visualization
 For visualization,  we recommend  ROS stage. RViz provides 2.5-D visualization, but may be noisy  due to ROS asynchronous communication delays.
 
-## Evaluation
+## Performance Evaluation
 
 A [dataset](./src/planner/maps/) of 5 maps are provided for evaluation, including 4 handcrafted maps (map1.png to map4.png) and a simplified COM1 level-1 floorplan (com1.jpg).  Each map has a corresponding list of testcases, with the goals specified [here](./files/goals.json). The robot always starts with pose (1, 1, 0).
 
@@ -62,7 +65,7 @@ For example,
 You may find the functions to save the results in base_planner.py. Some example control files can be found [here](./files/).
 
 ## Submission
-Submit a single zip archive and name it MatricNo-Lab1.zip. It contains 3 directories:
+Submit a single zip archive MatricNo-Lab1.zip, which contains 3 directories:
 - `Code`: your code
 - `Controls`: the control files for all testcases
 - `Report`: your report
