@@ -25,7 +25,7 @@ roslaunch planner turtlebot_in_stage.launch
 You should see RViz and ROS Stage. 
 
 ## Code Overview
-The FoodTurtle system consists of three components: the simulator, the planner, and the controller. The code in this repository provides most of these components, including the necessary functions for setting up ROS nodes in the simulator, data communication, and robot control. You will implement the planning algorithm and collision avoidance capabilities by filling in the template labeled `# TODO: FILL ME!` in base_planner.py. We recommend that you use *base_planner.py* as a base class and then implement your planners as derived classes.
+The FoodTurtle system consists of three components: the simulator, the planner, and the controller. The code in this repository provides most of these components, including the necessary functions for setting up ROS nodes in the simulator, data communication, and robot control. You will implement the planning algorithm and collision avoidance capabilities by filling in the template labeled `# TODO: FILL ME!` in *base_planner.py*. We recommend that you use *base_planner.py* as a base class and then implement your planners as derived classes.
 
 ## Code Execution
 Launch the simulator and execute the planner: 
