@@ -25,7 +25,7 @@ roslaunch planner turtlebot_in_stage.launch
 You should see RViz and ROS Stage. 
 
 ## Code Overview
-The FoodTurtle system consists of three components: the simulator, the planner, and the controller. The code in this repository provides most of these components, including the necessary functions for setting up ROS nodes in the simulator, data communication, and robot control. You will implement the planning algorithm and collision avoidance capabilities by filling in the template labeled `# TODO: FILL ME!` in base_planner.py. We recommend that you use base_planner.py as a base class and then implement your planners as derived classes.
+The FoodTurtle system consists of three components: the simulator, the planner, and the controller. The code in this repository provides most of these components, including the necessary functions for setting up ROS nodes in the simulator, data communication, and robot control. You will implement the planning algorithm and collision avoidance capabilities by filling in the template labeled `# TODO: FILL ME!` in `base_planner.py`. We recommend that you use `base_planner.py` as a base class and then implement your planners as derived classes.
 
 ## Code Execution
 Launch the simulator and execute the planner: 
@@ -35,7 +35,7 @@ sh run.sh [your map name] start_x start_y start_theta
 python your_planner.py --goal 'goal_x,goal_y' --com use_com_1_map_or_not
 ```
 
-For example, load *map1.png* and set the robot start pose as (x=1, y=1, θ=0): 
+For example, load `map1.png` and set the robot start pose as (x=1, y=1, θ=0): 
 ```
 roscd planner/src
 sh run.sh map1.png 1 1 0
@@ -51,7 +51,7 @@ The flag `--com`  indicates whether the COM1 map is used, as it requires a speci
 For visualization, we recommend the ROS Stage. RViz provides 2.5-D visualization, but may be noisy due to the asynchronous communication delay of ROS.
 
 ## Performance Evaluation
-A [dataset](./src/planner/maps/) provides 5 maps for evaluation, including 4 hand-crafted maps (map1.png to map4.png) and a simplified COM1 level-1 floor plan (com1.jpg). Each map has a corresponding list of test cases with goals specified [here](./files/goals.json). The robot always starts with the pose (1, 1, 0).
+A [dataset](./src/planner/maps/) provides 5 maps for evaluation, including 4 hand-crafted maps (`map1.png` to `map4.png`) and a simplified COM1 level-1 floor plan (`com1.jpg`). Each map has a corresponding list of test cases with goals specified [here](./files/goals.json). The robot always starts with the pose (1, 1, 0).
 
 To reduce your work, only map4.png may have a misalignment of less than 10 pixels. You can assume that all other maps are sufficiently accurate.
 
