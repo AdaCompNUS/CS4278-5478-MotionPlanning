@@ -18,7 +18,7 @@ turtle = re.sub("pose.*\]\t", "pose " + argv[3] + '\t', turtle)
 
 file = re.sub("turtlebot\t\(.*\)", turtle, file)
 if 'com1' in argv[2]:
-    content = "floorplan\t(\tname \"maze\"\tbitmap \"../com1.jpg\"\tsize [ 50.0 19.66 2.0 ]\tpose [  25.0  9.83 0.0 0.0 ]\t)\t"
+    content = "floorplan\t(\tname \"maze\"\tbitmap \"../com1.png\"\tsize [ 50.0 19.66 2.0 ]\tpose [  25.0  9.83 0.0 0.0 ]\t)\t"
 else:
     content = "floorplan\t(\tname \"maze\"\tbitmap \"{}\"\tsize [ 10.0 10.0 2.0 ]\tpose [ 5.0 5.0 0.0 0.0 ]\t)\t".format(argv[2])
 
