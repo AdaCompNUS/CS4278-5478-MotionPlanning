@@ -33,7 +33,7 @@ window
 floorplan
 (
 name "maze"
-bitmap "../com1.jpg"
+bitmap "../com1.png"
 size [ 50.0 19.66 2.0 ]
 pose [  25.0  9.83 0.0 0.0 ]
 )
