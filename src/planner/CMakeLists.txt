@@ -50,18 +50,19 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  Point.msg
-  Waypoints.msg
-  Control.msg
-  ControlSequence.msg
+  ContinuousAction.msg
+  ContinuousState.msg
+  DiscreteAction.msg
+  DiscreteState.msg
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  ContinuousActionSequenceExec.srv
+  DiscreteActionSequenceExec.srv
+  DiscreteActionStochasticExec.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -162,10 +163,10 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# install(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+install(PROGRAMS
+  scripts/robot_interface.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html

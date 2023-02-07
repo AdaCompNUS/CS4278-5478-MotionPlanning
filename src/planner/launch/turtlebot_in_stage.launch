@@ -66,6 +66,8 @@
     <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
   </include>
 
+  <node name="lab1_interface" pkg="planner" type="robot_interface.py" />
+
   <!--  **************** Visualisation ****************  -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find planner)/rviz/robot_navigation.rviz"/>
   <!-- <node name="simple_controller" pkg="planner" type="simple_controller" filename="simple_controller.py"/>

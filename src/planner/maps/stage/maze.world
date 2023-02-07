@@ -33,9 +33,9 @@ window
 floorplan
 (
 name "maze"
-bitmap "../com1.png"
-size [ 50.0 19.66 2.0 ]
-pose [  25.0  9.83 0.0 0.0 ]
+bitmap "../map1.png"
+size [ 10.0 10.0 2.0 ]
+pose [ 5.0 5.0 0.0 0.0 ]
 )
 # end of floor plan
 
