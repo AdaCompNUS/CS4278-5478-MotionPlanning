@@ -272,7 +272,7 @@ class RobotClient:
         Returns:
             bool -- goal or not
         """
-        return self._d_from_target(goal) < 0.25
+        return self._d_from_target(goal) < 0.3
 
     def publish_discrete_control(self, action_seq, goal):
         """Publish the discrete controls"""

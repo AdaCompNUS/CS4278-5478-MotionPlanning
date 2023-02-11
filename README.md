@@ -72,9 +72,6 @@ plan (`com1.png`). Each map has a corresponding list of test cases with goals
 specified [here](./files/goals.json). The robot always starts with the pose `(1,
 1, 0)`.
 
-To reduce your work, only map4.png may have a misalignment of less than 10
-pixels. You can assume that all other maps are sufficiently accurate.
-
 Evaluate your planners in all test cases under the three models, DSDA, CSDA and
 DSPA. For DSDA and CSDA, save the control actions in a `txt` file and name it
 `{task}_{map}_{goal_x}_{goal_y}.txt`. For DSPA, save the MDP control policy in a

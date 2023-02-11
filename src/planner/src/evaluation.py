@@ -1,17 +1,21 @@
+#!/usr/bin/env python
 import numpy as np
 import argparse
-import pdb
+import math
 import pickle
 import copy
+import json
+import os
 
 
 class Evaluator(object):
-    def __init__(self, filename, aug_map, start, goal):
+    def __init__(self, filename, aug_map, start, goal, res):
         self.filename = filename
         self.aug_map = aug_map
-        self.start = np.array(start) 
-        self.goal = np.array(goal) 
+        self.start = np.array(start)
+        self.goal = np.array(goal)
         self.gen_policy()
+        self.res = res
 
     def gen_policy(self):
         self.policy = np.genfromtxt(self.filename)
@@ -20,20 +24,19 @@ class Evaluator(object):
         return v * 0.5
 
     def simulate(self, actions):
-        pose = self.start
+        pose = np.array(self.start)
 
         distance = 0
         for v, w in actions:
-            pose = self.motion_predict(pose[0], pose[1], pose[2], v, w, aug_map)
-            pose = np.array(pose)
-            distance += self.distance_function()
+            pose = self.motion_predict(pose[0], pose[1], pose[2], v, w, self.aug_map)
+            distance += self.distance_function(v)
             if pose is None:
                 break
-            
+
         if pose is None:
             # print("Collision!")
             return -1
-        elif np.sum((pose[:2] - self.goal)**2) < 0.04:
+        elif np.sum((pose[:2] - self.goal) ** 2) < 0.09:
             # print('Reach the goal, distance traveled: {}'.format(distance))
             return distance
         else:
@@ -53,17 +56,25 @@ class Evaluator(object):
         dx = 0
         dy = 0
         for i in range(num_steps):
-            if w!=0:
-                dx = - v / w * np.sin(theta) + v / w * np.sin(theta + w / frequency)
+            if w != 0:
+                dx = -v / w * np.sin(theta) + v / w * np.sin(theta + w / frequency)
                 dy = v / w * np.cos(theta) - v / w * np.cos(theta + w / frequency)
             else:
-                dx = v*np.cos(theta)/frequency
-                dy = v*np.sin(theta)/frequency
+                dx = v * np.cos(theta) / frequency
+                dy = v * np.sin(theta) / frequency
             x += dx
             y += dy
-            if x>=10 or x<=0 or y>=10 or y<=0:
+
+            x_index = int(math.floor(x / self.res))
+            y_index = int(math.floor(y / self.res))
+            if (
+                x_index >= aug_map.shape[0]
+                or x <= 0
+                or y_index >= aug_map.shape[1]
+                or y <= 0
+            ):
                 return None
-            if (y*4000+x*20>39999) or (aug_map[int(y*20)*200 +int(x*20)]) == 100:
+            if aug_map[x_index, y_index] != 0:
                 return None
             theta += w / frequency
             if theta >= np.pi * 2:
@@ -74,36 +85,30 @@ class Evaluator(object):
 
 
 class DiscreteEvaluator(Evaluator):
-    def __init__(self, filename, aug_map, start, goal):
-        super(Evaluator, self).__init__(filename, aug_map, start, goal)
-    
     def gen_policy(self):
         self.policy = np.genfromtxt(self.filename)
         self.policy = self.generate_action_sequence_discrete(self.policy)
 
     def distance_function(self, v):
-        return 1
+        return 1 * v
 
     def generate_action_sequence_discrete(self, actions):
         controls = []
         for act in actions:
-            act = [act[0], act[1]*np.pi / 2]
+            act = [act[0], act[1] * np.pi / 2]
             controls += [act, act]
 
         return controls
 
-class MDPEvaluator(Evaluator):
-    def __init__(self, filename, aug_map, start, goal):
-        super(MDPEvaluator, self).__init__(filename, aug_map, start, goal)
 
+class MDPEvaluator(Evaluator):
     def gen_policy(self):
         try:
-            with open(self.filename, 'r') as fin:
-                import json
+            with open(self.filename, "r") as fin:
                 self.policy = json.load(fin)
         except:
             raise ValueError("incorrect policy file")
-    
+
     def get_action(self, pose):
         position = copy.deepcopy(pose)
         position[0] = round(position[0])
@@ -111,7 +116,7 @@ class MDPEvaluator(Evaluator):
         position[2] = round(position[2] / (np.pi / 2)) % 4
 
         position = [str(int(s)) for s in position]
-        position = ','.join(position)
+        position = ",".join(position)
         act = copy.deepcopy(self.policy[position])
 
         if act[0] != 0:
@@ -122,7 +127,7 @@ class MDPEvaluator(Evaluator):
                 act = [np.pi / 2, 1]
             else:
                 act = [np.pi / 2, -1]
-        
+
         act[1] = act[1] * np.pi / 2
 
         return [act, act]
@@ -134,48 +139,91 @@ class MDPEvaluator(Evaluator):
         while True:
             action = self.get_action(pose)
             for act in action:
-                pose = self.motion_predict(pose[0], pose[1], pose[2], act[0], act[1], self.aug_map)
+                pose = self.motion_predict(
+                    pose[0], pose[1], pose[2], act[0], act[1], self.aug_map
+                )
                 if pose is None:
                     break
                 pose = np.array(pose)
 
             steps += 1
 
-            if pose is None:
+            if pose is None or steps > 100:
                 return -1
-            elif np.sum((pose[:2] - np.array(self.goal)) ** 2) < 0.04:
+            elif np.sum((pose[:2] - np.array(self.goal)) ** 2) < 0.09:
                 return steps
             else:
                 pass
 
     def evaluate(self):
-        seed = 0
         records = []
-
-        for i in range(50):
+        N = 100
+        for i in range(N):
             step = self.simulate()
             spl = float(step > 0) / step
             records.append(spl)
 
-        return np.mean(records)
+        return np.sum(records) / N
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--map', type=int, default=8, help="map file")
-parser.add_argument('--start', type=str, default='1,1,0', help="start pos")
-parser.add_argument('--goal', type=str, default='1,7', help="goal pos")
-parser.add_argument('--actions', type=str, default='mdp_policy.json', help='action file')
-args = parser.parse_args()
 
-start = args.start.split(',')
-start = [int(pos) for pos in start]
-goal = args.goal.split(',')
-goal = np.array([int(pos) for pos in goal])
-
-# save the augmented map as a pickle and load it here
-with open('./map{}.pkl'.format(args.map), 'rb') as fin:
-    # -1 empty space, 100 obstacle
-    aug_map = pickle.load(fin)
-
-evaluator = MDPEvaluator(args.actions, aug_map, start, goal)
-spl = evaluator.evaluate()
-print(spl)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-g",
+        "--goal-file",
+        type=str,
+        default="../files/goals.json",
+        help="JSON file of goals.",
+    )
+    parser.add_argument(
+        "-m",
+        "--map-dir",
+        type=str,
+        default="./logs",
+        help="Directory to store aug maps.",
+    )
+    parser.add_argument(
+        "-c",
+        "--control-dir",
+        type=str,
+        default="./Controls",
+        help="Directory to store motion plans.",
+    )
+    args = parser.parse_args()
+    with open(args.goal_file, "r") as _f:
+        goal_dict = json.load(_f)
+    scores = {}
+    for map_name in ["map1", "map2", "map3", "map4", "com1"]:
+        goals = goal_dict["%s.png" % map_name]
+        map_path = os.path.join(args.map_dir, map_name + ".pkl")
+        res = 0.02 if map_name == "com1" else 0.05
+        with open(map_path, "rb") as fin:
+            loaded_aug_map = pickle.load(fin)
+        for task in ["DSDA", "CSDA", "DSPA"]:
+            for goal in goals:
+                filename = (
+                    task + "_" + map_name + "_" + str(goal[0]) + "_" + str(goal[1])
+                )
+                plan_path = os.path.join(args.control_dir, filename)
+                try:
+                    if task == "DSDA":
+                        plan_path = plan_path + ".txt"
+                        evaluator = DiscreteEvaluator(
+                            plan_path, loaded_aug_map, (1, 1, 0), goal, res
+                        )
+                    elif task == "CSDA":
+                        plan_path = plan_path + ".txt"
+                        evaluator = Evaluator(
+                            plan_path, loaded_aug_map, (1, 1, 0), goal, res
+                        )
+                    else:
+                        plan_path = plan_path + ".json"
+                        evaluator = MDPEvaluator(
+                            plan_path, loaded_aug_map, (1, 1, 0), goal, res
+                        )
+                    spl = evaluator.evaluate()
+                    print("%s score %s" % (filename, spl))
+                    scores[filename] = spl
+                except Exception as e:
+                    print("Failed to evaluate %s: %s" % (filename, e))
+    print(scores)
