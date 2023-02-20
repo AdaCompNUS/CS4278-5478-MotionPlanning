@@ -68,7 +68,7 @@ ROS.
 ## Performance Evaluation
 A [dataset](./src/planner/maps/) provides 5 maps for evaluation, including 4
 hand-crafted maps (`map1.png` to `map4.png`) and a simplified COM1 level-1 floor
-plan (`com1.png`). Each map has a corresponding list of test cases with goals
+plan (`com1building.png`). Each map has a corresponding list of test cases with goals
 specified [here](./files/goals.json). The robot always starts with the pose `(1,
 1, 0)`.
 
@@ -81,7 +81,7 @@ DSPA. For DSDA and CSDA, save the control actions in a `txt` file and name it
 For example, 
 - `DSDA_map2_5_5.txt` for DSDA on `map2.png` with `[5, 5]` as the goal.
 - `CSDA_map3_9_9.txt` for CSDA on `map3.png` with `[9, 9]` as the goal.
-- `DSPA_com1_43_10.json` for the MDP policy on com1.png with `[43, 10]` as the
+- `DSPA_com1building_43_10.json` for the MDP policy on com1building.png with `[43, 10]` as the
   goal.
 
 You can find the functions to save the results in base_planner.py. Some examples

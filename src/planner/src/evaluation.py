@@ -7,6 +7,8 @@ import copy
 import json
 import os
 
+def rd(x):
+    return int(round(x))
 
 class Evaluator(object):
     def __init__(self, filename, aug_map, start, goal, res):
@@ -36,7 +38,7 @@ class Evaluator(object):
         if pose is None:
             # print("Collision!")
             return -1
-        elif np.sum((pose[:2] - self.goal) ** 2) < 0.09:
+        elif rd(pose[0]) == self.goal[0] and rd(pose[1]) == self.goal[1]:
             # print('Reach the goal, distance traveled: {}'.format(distance))
             return distance
         else:
@@ -150,7 +152,7 @@ class MDPEvaluator(Evaluator):
 
             if pose is None or steps > 100:
                 return -1
-            elif np.sum((pose[:2] - np.array(self.goal)) ** 2) < 0.09:
+            elif rd(pose[0]) == self.goal[0] and rd(pose[1]) == self.goal[1]:
                 return steps
             else:
                 pass
@@ -193,10 +195,10 @@ if __name__ == "__main__":
     with open(args.goal_file, "r") as _f:
         goal_dict = json.load(_f)
     scores = {}
-    for map_name in ["map1", "map2", "map3", "map4", "com1"]:
+    for map_name in ["map1", "map2", "map3", "map4", "com1building"]:
         goals = goal_dict["%s.png" % map_name]
         map_path = os.path.join(args.map_dir, map_name + ".pkl")
-        res = 0.02 if map_name == "com1" else 0.05
+        res = 0.02 if map_name == "com1building" else 0.05
         with open(map_path, "rb") as fin:
             loaded_aug_map = pickle.load(fin)
         for task in ["DSDA", "CSDA", "DSPA"]:
