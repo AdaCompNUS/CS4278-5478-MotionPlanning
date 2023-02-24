@@ -193,10 +193,11 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     with open(args.goal_file, "r") as _f:
-        goal_dict = json.load(_f)
+        task_dict = json.load(_f)
     scores = {}
     for map_name in ["map1", "map2", "map3", "map4", "com1building"]:
-        goals = goal_dict["%s.png" % map_name]
+        goals = task_dict["%s.png" % map_name]["goals"]
+        init = task_dict["%s.png" % map_name]["init"]
         map_path = os.path.join(args.map_dir, map_name + ".pkl")
         res = 0.02 if map_name == "com1building" else 0.05
         with open(map_path, "rb") as fin:
@@ -211,17 +212,17 @@ if __name__ == "__main__":
                     if task == "DSDA":
                         plan_path = plan_path + ".txt"
                         evaluator = DiscreteEvaluator(
-                            plan_path, loaded_aug_map, (1, 1, 0), goal, res
+                            plan_path, loaded_aug_map, init, goal, res
                         )
                     elif task == "CSDA":
                         plan_path = plan_path + ".txt"
                         evaluator = Evaluator(
-                            plan_path, loaded_aug_map, (1, 1, 0), goal, res
+                            plan_path, loaded_aug_map, init, goal, res
                         )
                     else:
                         plan_path = plan_path + ".json"
                         evaluator = MDPEvaluator(
-                            plan_path, loaded_aug_map, (1, 1, 0), goal, res
+                            plan_path, loaded_aug_map, init, goal, res
                         )
                     spl = evaluator.evaluate()
                     print("%s score %s" % (filename, spl))

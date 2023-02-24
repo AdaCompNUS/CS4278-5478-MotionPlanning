@@ -68,9 +68,8 @@ ROS.
 ## Performance Evaluation
 A [dataset](./src/planner/maps/) provides 5 maps for evaluation, including 4
 hand-crafted maps (`map1.png` to `map4.png`) and a simplified COM1 level-1 floor
-plan (`com1building.png`). Each map has a corresponding list of test cases with goals
-specified [here](./files/goals.json). The robot always starts with the pose `(1,
-1, 0)`.
+plan (`com1building.png`). Each map has a corresponding list of test cases with
+the initial state and goals specified [here](./files/goals.json).
 
 Evaluate your planners in all test cases under the three models, DSDA, CSDA and
 DSPA. For DSDA and CSDA, save the control actions in a `txt` file and name it
